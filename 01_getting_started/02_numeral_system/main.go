@@ -3,7 +3,8 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Printf("%d %b %o %#x\n", 42, 42, 42, 42)
-	fmt.Printf("%f %.3f\n", 42.0126232, 42.0126232)
-	fmt.Printf("%c", 65)
+	fmt.Printf("%d\n", 32)
+	fmt.Printf("%d %b %o %#X\n", 32, 32, 32, 32)
+	fmt.Printf("%f %.2f %3.3f", 1.2365, 1.2365, 1.2365)
+	fmt.Printf("%c\n", 56)
 }
