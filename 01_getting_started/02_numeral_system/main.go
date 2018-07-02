@@ -10,5 +10,5 @@ func main() {
 	fmt.Printf("Octal : %o\n",10)
 	fmt.Printf("Char : %c\n",'a')
 	fmt.Printf("Float : %f\n",20.323)
-	fmt.Printf("Float : %9.2f\n",20.36336)
+	fmt.Printf("Float : %8.2f\n",20.36336)
 }
