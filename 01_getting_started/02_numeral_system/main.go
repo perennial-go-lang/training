@@ -3,8 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Printf("%d\n", 32)
-	fmt.Printf("%d %b %o %#X\n", 32, 32, 32, 32)
-	fmt.Printf("%f %.2f %3.3f", 1.2365, 1.2365, 1.2365)
-	fmt.Printf("%c\n", 58)
+	fmt.Printf("Integer->%d  Binary->%b  Octal->%o  Hexagon->%#X\n", 123, 123, 123, 123)
+	fmt.Printf("%f %.2f %3.3f\n", 123.456, 123.456, 123.456)
+	fmt.Printf("Character Represantation of 58 -> %c\n", 65)
 }
