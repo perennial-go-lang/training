@@ -1,21 +1,18 @@
 package main
 
-import (
-	"fmt"
+import "fmt"
+
+const (
+	_  = iota // ignore first value by assigning to blank identifier
+	KB = 1 << (10 * iota)
+	MB
+	GB
+	TB
 )
 
 func main() {
-	slice := []int{1, 2, 3, 4, 5}
-	slice2 := []int{6, 7, 8, 9, 10}
-
-	fmt.Println("Slice 1: ", slice)
-	fmt.Println("Slice:2: ", slice2)
-
-	slice = append(slice, slice2...)
-
-	fmt.Println("Joined Slice: ", slice)
-
-	slice = append(slice[:4], slice[5:]...) // Delete 5
-
-	fmt.Println("After deleting 5 from slice: ", slice1)
+	fmt.Printf("1 KB = %v bytes\n", KB)
+	fmt.Printf("1 MB = %v KB = %v bytes\n", MB/KB, MB)
+	fmt.Printf("1 GB = %v MB = %v KB = %v bytes\n", GB/MB, GB/KB, GB)
+	fmt.Printf("1 TB = %v GB = %v MB = %v KB = %v bytes\n", TB/GB, TB/MB, TB/KB, TB)
 }
