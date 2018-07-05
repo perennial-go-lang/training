@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 const (
-	e = 2.71828
+	e    = 2.71828
 	name = "Euler's number"
 )
 
