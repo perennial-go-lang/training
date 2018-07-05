@@ -4,7 +4,7 @@ import "fmt"
 
 func main() {
 	var hello, world = "Hello", "World!"
-	var a, b, c = 1, 2, 3
+	var a, b, c = 1, 2, 3.0
 
 	fmt.Printf("hello(type) - %T (value) - %v\n", hello, hello)
 	fmt.Printf("world(type) - %T (value) - %v\n", world, world)

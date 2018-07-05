@@ -20,10 +20,10 @@ func switchOnType(i interface{}) {
 }
 
 func main() {
-	variable := "ABC"
+	//variable := "ABC"
 	//variable := 123
 	//variable := true
-	//variable := 1.23
+	variable := 1.23
 	//variable := 'a'
 
 	switchOnType(variable)
