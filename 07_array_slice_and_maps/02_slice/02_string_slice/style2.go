@@ -11,5 +11,5 @@ func main() {
 	fmt.Println(x[2:])  // slicing a slice
 	fmt.Println(x[2])    // index access; accessing by index
 
-	fmt.Println("myString"[2]) // index access; accessing by index
+	fmt.Println("myString"[2:]) // index access; accessing by index
 }
