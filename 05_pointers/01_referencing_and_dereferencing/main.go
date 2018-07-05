@@ -9,7 +9,7 @@ func main() {
 	fmt.Println(a, *b) // Print 24 24
 
 	c := *b // Declare variable c that dereferences the value from the integer pointer b
-	a = 30 // Update value of variable a
+	a = 30  // Update value of variable a
 
 	fmt.Println(a, *b, c) // What will this print?
 }
