@@ -13,7 +13,8 @@ func main() {
 
 	fmt.Println(student == nil)
 
-	student[0] = "Ajitem"
+	//student[0] = "Ajitem"
+	student = append(student, "Ajitem")
 
 	fmt.Println(student)
 	fmt.Println(students)
