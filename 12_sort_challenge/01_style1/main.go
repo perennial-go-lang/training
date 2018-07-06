@@ -3,11 +3,10 @@ package main
 import (
 	"fmt"
 	. "github.com/perennial-go-training/training/12_sort_challenge/01_style1/student"
-	"sort"
 )
 
 func main() {
-	students := []Student{
+	students := Students{
 		{
 			"B",
 			20,
@@ -28,6 +27,26 @@ func main() {
 	fmt.Println(students)
 
 	fmt.Println("Sorting by Name")
-	sort.Sort(ByName{students, false})
-	fmt.Println(students)
+
+	By(Name).SortAsc(students)
+	fmt.Println("Ascending Order", students)
+
+	By(Name).SortDesc(students)
+	fmt.Println("Descending Order", students)
+
+	fmt.Println("Sorting by Age")
+
+	By(Age).SortAsc(students)
+	fmt.Println("Ascending Order", students)
+
+	By(Age).SortDesc(students)
+	fmt.Println("Descending Order", students)
+
+	fmt.Println("Sorting by Percentage")
+
+	By(Percentage).SortAsc(students)
+	fmt.Println("Ascending Order", students)
+
+	By(Percentage).SortDesc(students)
+	fmt.Println("Descending Order", students)
 }

@@ -27,14 +27,12 @@ func main() {
 	fmt.Println(students)
 
 	fmt.Println("Sorting by Name")
-	By(Name).Sort(students)
-	fmt.Println(students)
 
-	fmt.Println("Sorting by Age")
 	By(Age).Sort(students)
-	fmt.Println(students)
+	fmt.Println("Ascending Order", students)
+	By(Age, Percentage).Sort(students)
+	fmt.Println("Ascending Order", students)
 
-	fmt.Println("Sorting by Percentage")
-	By(Percentage).Sort(students)
-	fmt.Println(students)
+	//By(Name).Sort(student, "desc")
+	//fmt.Println("Descending Order", student)
 }
