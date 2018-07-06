@@ -8,6 +8,7 @@ func main() {
 
 	fmt.Println(greeting)
 	fmt.Printf("%T", greet)
+
 }
 
 func makeGreeter(name string) func() string {
