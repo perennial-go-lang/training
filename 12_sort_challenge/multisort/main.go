@@ -44,4 +44,8 @@ func main() {
 	fmt.Println("Student's List by age, percentage, name ascending")
 	By{age, percentage, name}.SortAsc(students)
 	fmt.Println(students)
+
+	fmt.Println("Student's List by age, percentage, name descending")
+	By{age, percentage, name}.SortDesc(students)
+	fmt.Println(students)
 }
