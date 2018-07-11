@@ -1,19 +1,23 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"program_metrics"
+)
 
 func main() {
 	var numbersToPrint int
 	fmt.Println("Enter numbers to print in the Fibonacci Series")
 	fmt.Scan(&numbersToPrint)
+	metrics.Start()
 
 	f := fibonacci()
 
 	for i := 0; i <= 10; i++ {
-		//_ = f()
 		fmt.Print(f(), " ")
 	}
-	//fmt.Print(f())
+
+	metrics.End()
 }
 
 func fibonacci() func() int {
