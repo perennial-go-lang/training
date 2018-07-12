@@ -2,21 +2,28 @@ package main
 
 import (
 	"fmt"
+	"time"
 )
 
 func main() {
 	var numbersToPrint int
 	fmt.Println("Enter numbers to print in the Fibonacci Series")
 	fmt.Scan(&numbersToPrint)
-	metrics.Start()
 
 	f := fibonacci()
-
-	for i := 0; i <= 10; i++ {
-		fmt.Print(f(), " ")
+	sem := make(chan bool)
+	var ss = time.Now()
+	for i := 0; i <= numbersToPrint; i++ {
+		go func() {
+			fmt.Print(f(), " ")
+			sem <- true
+		}()
 	}
 
-	metrics.End()
+	for i := 0; i <= numbersToPrint; i++ {
+		<-sem
+	}
+	fmt.Println("\nTime Consumed:", time.Since(ss))
 }
 
 func fibonacci() func() int {

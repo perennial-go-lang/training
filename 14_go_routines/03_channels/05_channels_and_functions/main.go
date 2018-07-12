@@ -2,11 +2,10 @@ package main
 
 import (
 	"fmt"
-	"program_metrics"
 )
 
 func main() {
-	metrics.Start()
+	// metrics.Start()
 	c := gen()
 	r := calc(c)
 
@@ -14,13 +13,13 @@ func main() {
 		fmt.Println(n)
 	}
 
-	metrics.End()
+	// metrics.End()
 }
 
 func gen() chan int {
 	c := make(chan int)
 	go func() {
-		for i:=0; i < 10; i++ {
+		for i := 0; i < 10; i++ {
 			c <- i
 		}
 		close(c)
@@ -31,26 +30,27 @@ func gen() chan int {
 func calc(c chan int) chan int {
 	o := make(chan int)
 	go func() {
-		ic := make(chan int)
+		// ic := make(chan int)
 		done := make(chan bool)
 		var l int
 		for n := range c {
 			l++
 			go func(v int) {
-				ic <- v + 1
+				o <- v + 1
 				done <- true
 			}(n)
 		}
 		go func() {
 			for i := 0; i < l; i++ {
-				<- done
+				<-done
 			}
-			close(ic)
+			close(o)
+			// close(ic)
 		}()
-		for n := range ic {
-			o <- n
-		}
-		close(o)
+		// for n := range o {
+		// 	o <- n
+		// }
+
 	}()
 	return o
 }
