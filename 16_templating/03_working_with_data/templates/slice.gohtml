@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Go Templating</title>
+</head>
+<body>
+{{ $names := . }}
+<h3>Go Students</h3>
+<ul>
+    {{range $index, $value := $names }}
+        <li>{{$index}} - {{$value}}</li>
+    {{end}}
+</ul>
+</body>
+</html>
