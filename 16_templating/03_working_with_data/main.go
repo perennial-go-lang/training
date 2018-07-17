@@ -1,26 +1,26 @@
 package main
 
 import (
-	"text/template"
-	"os"
 	"log"
-	"strings"
+	"os"
 	"strconv"
+	"strings"
+	"text/template"
 )
 
 var tpl *template.Template
 
 type Student struct {
-	Name string
-	Age int
+	Name       string
+	Age        int
 	Percentage float64
 }
 
 var fm = template.FuncMap{
-	"lc": strings.ToLower,
-	"per": formatPercentage,
+	"lc":   strings.ToLower,
+	"per":  formatPercentage,
 	"itos": intToString,
-	"age": formatAge,
+	"age":  formatAge,
 }
 
 func formatPercentage(percentage float64) string {

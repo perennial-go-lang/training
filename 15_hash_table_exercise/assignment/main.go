@@ -8,15 +8,27 @@ import (
 	"sync/atomic"
 )
 
-type end = []string
-type aaa map[int]end
+const NUMBER_OF_BUCKETS = 8
 
-var bucket = [8]aaa{}
+type aaa map[int][]string
+
+var bucket = [NUMBER_OF_BUCKETS]aaa{}
 
 var occurance int32
+var bucketCount [NUMBER_OF_BUCKETS]int
+var count [NUMBER_OF_BUCKETS]int
 
 func main() {
-	res, err := http.Get("http://www.gutenberg.org/files/74/74-0.txt")
+
+	fmt.Println("**************************************************************")
+	fmt.Println("*                Welcome to Word Sort                        *")
+	fmt.Println("**************************************************************")
+
+	fmt.Println("* Please enter file URL:                                     *")
+
+	fileUrl := ""
+	fmt.Scanln(&fileUrl)
+	res, err := http.Get(fileUrl)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -29,15 +41,13 @@ func main() {
 	var words int
 	var word string
 
-	// type aaa map[int]end
-	// bucket := [8]aaa{}
-	bucketCount := make([]int, 8)
-
 	var el aaa
+
 	for scanner.Scan() {
-		words++
 		word = scanner.Text()
-		bId := getBucketId(word, 8)
+		bId := getBucketId(word, NUMBER_OF_BUCKETS)
+
+		words++
 		bucketCount[bId]++
 		if bucket[bId] == nil {
 			el = aaa{}
@@ -48,22 +58,66 @@ func main() {
 		bucket[bId] = el
 	}
 
-	// fmt.Println(bucket[7], bucketCount[7], len(bucket[7]))
-	var count [8]int
+	// time.Sleep(5 * time.Second)
 	for index, bid := range bucket {
-		// l := 0
-		for key, val := range bid {
-			fmt.Println(string(key), len(val))
+		for _, val := range bid {
+			// fmt.Println(string(key), len(val))
 			count[index] = count[index] + len(val)
 		}
 	}
-	fmt.Println(count)
+	fmt.Printf("Total words found: %d\n", words)
 
-	wordTosearch := ""
-	fmt.Print("Enter word to Search: ")
-	fmt.Scanln(&wordTosearch)
-	fmt.Println("Word is", wordTosearch)
-	fmt.Println(search(wordTosearch))
+	doMore := true
+	for doMore == true {
+		fmt.Println("**************************************************************")
+		fmt.Println("* Please choose option:                                      *")
+		fmt.Println("* 1. Search by word            2.Count by initial            *")
+		fmt.Println("* 3. Bucket wise count                                       *")
+		fmt.Println("**************************************************************")
+
+		option := 0
+		fmt.Scanln(&option)
+
+		switch option {
+		case 1:
+			fmt.Println("* Enter word: 												  *")
+			wordTosearch := ""
+			fmt.Scanln(&wordTosearch)
+			fmt.Println("Word is", wordTosearch)
+			fmt.Println("We found ", search(wordTosearch), " occurarences of word: ", wordTosearch)
+		case 2:
+			fmt.Println("* Enter initial: 										      *")
+			wordTosearch := ""
+			fmt.Scanln(&wordTosearch)
+			bId := getBucketId(wordTosearch, NUMBER_OF_BUCKETS)
+			fmt.Println("Count is", len(bucket[bId][int(wordTosearch[0])]))
+		case 3:
+			showBucketWise()
+		default:
+			fmt.Println("Please enter write choice")
+		}
+		fmt.Println("Do you want to do more? Y:yes, N: No")
+		wantMore := "Y"
+		fmt.Scanln(&wantMore)
+		correctChoice := false
+		for correctChoice == false {
+			switch wantMore {
+			case "Y":
+				doMore = true
+				correctChoice = true
+			case "N":
+				doMore = false
+				correctChoice = true
+			default:
+				fmt.Println("Please enter write choice Y/N")
+				correctChoice = false
+				doMore = false
+				fmt.Println("Do you want to do more? Y:yes, N: No")
+				wantMore := "Y"
+				fmt.Scanln(&wantMore)
+			}
+		}
+	}
 }
 
 func getBucketId(word string, numberOfBuckets int) int {
@@ -72,7 +126,7 @@ func getBucketId(word string, numberOfBuckets int) int {
 }
 
 func search(word string) int32 {
-	bId := getBucketId(word, 8)
+	bId := getBucketId(word, NUMBER_OF_BUCKETS)
 	occurance = 0
 	arraySize := int(len(bucket[bId][int(word[0])]) / 100)
 	sema := make(chan bool)
@@ -86,10 +140,14 @@ func search(word string) int32 {
 			sema <- true
 		}(k)
 	}
-
 	for m := 0; m <= arraySize; m++ {
 		<-sema
 	}
-
 	return occurance
+}
+
+func showBucketWise() {
+	for i := 0; i < NUMBER_OF_BUCKETS; i++ {
+		fmt.Printf("Bucket %d : %d\n", i, bucketCount[i])
+	}
 }
