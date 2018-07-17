@@ -1,0 +1,6 @@
+{{define "bodyTemplate"}}
+    <h1>Hello, World</h1>
+    {{range $index, $value := .}}
+    <p>{{$index}} {{$value}}</p>
+    {{end}}
+{{end}}
