@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Go Templating</title>
+</head>
+<body>
+{{$students := .}}
+<h3>Go Students</h3>
+<ul>
+    {{range $i, $student := $students }}
+        {{if ge $i 1 }}
+            <li>{{$i}} > {{lc $student.Name}} - {{itos $student.Age | age}} - {{per $student.Percentage}}</li>
+        {{end}}
+    {{end}}
+</ul>
+</body>
+</html>

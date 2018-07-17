@@ -21,17 +21,20 @@ func main() {
 	var words int
 	var word string
 
-	bucket := make([]int, 8)
+	bucket := make([]int, 12)
 	for scanner.Scan() {
 		words++
 		word = scanner.Text()
-		bId := getBucketId(word, 8)
+		bId := getBucketId(word, 12)
 		bucket[bId]++
 	}
 	fmt.Println(words, bucket)
 }
 
 func getBucketId(word string, numberOfBuckets int) int {
-	letter := int(word[0])
-	return letter % numberOfBuckets
+	var sum int
+	for _, char := range word  {
+		sum += int(char)
+	}
+	return sum % numberOfBuckets
 }
