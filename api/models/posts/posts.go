@@ -2,17 +2,18 @@ package posts
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 	"strconv"
 
 	"github.com/rohitpavaskar/training/api/models"
 )
 
-func Get() []map[string]string {
+func Get() (data []map[string]string, err error) {
 	// Prepare statement for reading data
 	stmtOut, err := models.Db.Prepare("SELECT * FROM posts")
 	if err != nil {
-		panic(err.Error()) // proper error handling instead of panic in your app
+		return data, err
 	}
 	defer stmtOut.Close()
 
@@ -24,7 +25,7 @@ func Get() []map[string]string {
 	// Get column names
 	columns, err := rows.Columns()
 	if err != nil {
-		panic(err.Error()) // proper error handling instead of panic in your app
+		return data, err
 	}
 
 	// Make a slice for the values
@@ -37,8 +38,6 @@ func Get() []map[string]string {
 	for i := range values {
 		scanArgs[i] = &values[i]
 	}
-
-	data := []map[string]string{}
 
 	// Fetch rows
 	for rows.Next() {
@@ -46,7 +45,7 @@ func Get() []map[string]string {
 		// get RawBytes from data
 		err = rows.Scan(scanArgs...)
 		if err != nil {
-			panic(err.Error()) // proper error handling instead of panic in your app
+			return data, err
 		}
 
 		// Now do something with the data.
@@ -65,43 +64,47 @@ func Get() []map[string]string {
 		data = append(data, row)
 	}
 	if err = rows.Err(); err != nil {
-		panic(err.Error()) // proper error handling instead of panic in your app
+		if err != nil {
+			return data, err
+		}
 	}
 
 	defer rows.Close()
-	return data
+	return data, nil
 }
 
-func Insert(data map[string]string) {
+func Insert(data map[string]string) (err error) {
 	// Prepare statement for inserting data
-	stmtIns, err := models.Db.Prepare("INSERT INTO  posts (title,description) VALUES( ? ,?)") // ? = placeholder
+	stmtIns, err := models.Db.Prepare("INSERT INTO  poswts (title,description) VALUES( ? ,?)") // ? = placeholder
 	if err != nil {
-		panic(err.Error()) // proper error handling instead of panic in your app
+		return err
 	}
 	defer stmtIns.Close()                                     // Close the statement when we leave main() / the program terminates
 	_, err = stmtIns.Exec(data["title"], data["description"]) // Insert tuples (i, i^2)
+	fmt.Println()
 	if err != nil {
-		panic(err.Error()) // proper error handling instead of panic in your app
+		return err
 	}
+	return nil
 }
 
-func First(id int) map[string]string {
+func First(id int) (data map[string]string, err error) {
 	// Prepare statement for reading data
 	stmtOut, err := models.Db.Prepare("SELECT * FROM posts WHERE id = " + strconv.FormatInt(int64(id), 10) + " LIMIT 1")
 	if err != nil {
-		panic(err.Error()) // proper error handling instead of panic in your app
+		return data, err
 	}
 	defer stmtOut.Close()
 
 	rows, err := stmtOut.Query()
 	if err != nil {
-		log.Fatalln(err)
+		return data, err
 	}
 
 	// Get column names
 	columns, err := rows.Columns()
 	if err != nil {
-		panic(err.Error()) // proper error handling instead of panic in your app
+		return data, err
 	}
 
 	// Make a slice for the values
@@ -115,7 +118,6 @@ func First(id int) map[string]string {
 		scanArgs[i] = &values[i]
 	}
 
-	data := []map[string]string{}
 	var row = make(map[string]string)
 	// Fetch rows
 	for rows.Next() {
@@ -123,7 +125,7 @@ func First(id int) map[string]string {
 		// get RawBytes from data
 		err = rows.Scan(scanArgs...)
 		if err != nil {
-			panic(err.Error()) // proper error handling instead of panic in your app
+			return data, err
 		}
 
 		// Now do something with the data.
@@ -139,39 +141,41 @@ func First(id int) map[string]string {
 			row[columns[i]] = value
 			// fmt.Println(columns[i], ": ", value)
 		}
-		data = append(data, row)
+		data = row
 	}
 
 	if err = rows.Err(); err != nil {
-		panic(err.Error()) // proper error handling instead of panic in your app
+		return data, err
 	}
 
 	defer rows.Close()
-	return row
+	return data, nil
 }
 
-func Update(data map[string]string, id int) {
+func Update(data map[string]string, id int) error {
 	// Prepare statement for inserting data
 	stmtIns, err := models.Db.Prepare("UPDATE  posts SET title = ? , description = ? WHERE id = ?") // ? = placeholder
 	if err != nil {
-		panic(err.Error()) // proper error handling instead of panic in your app
+		return err
 	}
 	defer stmtIns.Close()                                         // Close the statement when we leave main() / the program terminates
 	_, err = stmtIns.Exec(data["title"], data["description"], id) // Insert tuples (i, i^2)
 	if err != nil {
-		panic(err.Error()) // proper error handling instead of panic in your app
+		return err
 	}
+	return nil
 }
 
-func Delete(id int) {
+func Delete(id int) error {
 	// Prepare statement for inserting data
 	stmtIns, err := models.Db.Prepare("DELETE FROM posts WHERE id = ?") // ? = placeholder
 	if err != nil {
-		panic(err.Error()) // proper error handling instead of panic in your app
+		return err
 	}
 	defer stmtIns.Close()     // Close the statement when we leave main() / the program terminates
 	_, err = stmtIns.Exec(id) // Insert tuples (i, i^2)
 	if err != nil {
-		panic(err.Error()) // proper error handling instead of panic in your app
+		return err
 	}
+	return nil
 }
