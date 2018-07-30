@@ -3,9 +3,9 @@ package main
 import "fmt"
 
 func main() {
-	x := make([]int, 0, 10)
+	x := make([]int, 1, 10) // type, length, capacity
 
-	//x[1] = 1 // Panic! Use append instead.
+	x[0] = 1 // Panic! Use append instead.
 
 	fmt.Printf("Type - %T\n", x)
 	fmt.Println("Contents - ", x)
