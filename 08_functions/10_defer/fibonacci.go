@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"program_metrics"
 )
 
 func main() {
@@ -24,7 +23,7 @@ func fibonacci() func() uint64 {
 	a, b := uint64(1), uint64(1)
 	return func() uint64 {
 		defer func() {
-			a, b = b, a + b
+			a, b = b, a+b
 		}()
 		return a
 	}

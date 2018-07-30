@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	c := make(chan int) //unbuffered integer channel
+	c := make(chan int)     //unbuffered integer channel
 	done := make(chan bool) // semaphore channel
 
 	go func() {
@@ -29,7 +29,7 @@ func main() {
 		}
 		done <- true
 	}()
+	<-done
+	<-done
 
-	<- done
-	<- done
 }

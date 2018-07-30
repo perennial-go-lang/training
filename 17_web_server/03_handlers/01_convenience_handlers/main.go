@@ -1,15 +1,15 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
-	"fmt"
 	"time"
 )
 
 const port = 6767
 
-type MyHandler struct {}
+type MyHandler struct{}
 
 func main() {
 	filesHandler := http.FileServer(http.Dir("/home/ajitem"))
@@ -27,6 +27,6 @@ func main() {
 }
 
 func (m *MyHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	time.Sleep(2*time.Second)
+	time.Sleep(2 * time.Second)
 	fmt.Fprint(w, "Hello, World!")
 }

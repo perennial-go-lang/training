@@ -1,10 +1,10 @@
 package main
 
 import (
-	"net/http"
-	"log"
-	"fmt"
 	"encoding/json"
+	"fmt"
+	"log"
+	"net/http"
 )
 
 const port = 6767

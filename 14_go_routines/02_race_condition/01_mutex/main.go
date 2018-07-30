@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"sync"
 	"time"
-	"program_metrics"
 )
 
 var wg sync.WaitGroup
