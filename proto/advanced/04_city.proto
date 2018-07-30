@@ -1,0 +1,9 @@
+syntax="proto3";
+
+package address;
+
+message City {
+    string CityName = 1;
+    string ZipCode = 2;
+    string CountryName = 3;
+}
