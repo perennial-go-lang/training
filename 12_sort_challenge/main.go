@@ -28,7 +28,7 @@ func main() {
 }
 
 func (p People) Len() int {
-	return  len(p)
+	return len(p)
 }
 
 func (p People) Swap(i, j int) {
