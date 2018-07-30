@@ -1,0 +1,11 @@
+syntax="proto3";
+
+package address;
+
+import "advanced/04_street.proto";
+
+message Building {
+    string BuildingName = 1;
+    int32 BuildingNumber = 2;
+    address.Street Street = 3;
+}

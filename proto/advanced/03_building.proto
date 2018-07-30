@@ -1,0 +1,9 @@
+syntax="proto3";
+
+import "03_street.proto";
+
+message Building {
+    string BuildingName = 1;
+    int32 BuildingNumber = 2;
+    Street Street = 3;
+}
