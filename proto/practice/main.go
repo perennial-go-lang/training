@@ -118,12 +118,12 @@ func doComplex() complexpb.ComplexMessage {
 			Name: "First Message",
 		},
 		MultipleDummy:[]*complexpb.DummyMessage{
-			&complexpb.DummyMessage{
-				Id: 1,
+			{
+				Id:   1,
 				Name: "First Message",
 			},
-			&complexpb.DummyMessage{
-				Id: 1,
+			{
+				Id:   1,
 				Name: "First Message",
 			},
 		},
