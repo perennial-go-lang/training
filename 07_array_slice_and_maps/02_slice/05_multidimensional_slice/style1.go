@@ -5,8 +5,8 @@ import (
 )
 
 func main() {
-	student := []string{}
-	students := [][]string{}
+	var student []string
+	var students [][]string
 
 	fmt.Println(student)
 	fmt.Println(students)

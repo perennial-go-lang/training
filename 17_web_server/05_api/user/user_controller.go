@@ -8,6 +8,7 @@ import (
 	"strconv"
 	"github.com/thedevsaddam/govalidator"
 	"github.com/perennial-go-training/training/17_web_server/05_api/validator"
+	"log"
 )
 
 func GetUser(w http.ResponseWriter, r *http.Request) {
@@ -40,19 +41,26 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	rules := govalidator.MapData{
 		"fName": []string{"required", "alpha"},
 		"lName": []string{"required", "alpha"},
-		"age": []string{"required", "numeric"},
+		"age":   []string{"required", "numeric"},
 	}
 
 	messages := govalidator.MapData{
 		"fName": []string{"required:First Name is required", "alpha:First Name can only contain characters"},
 		"lName": []string{"required:Last Name is required", "alpha:Last Name can only contain characters"},
-		"age": []string{"required:Age is required", "number:Age must be a number"},
+		"age":   []string{"required:Age is required", "number:Age must be a number"},
 	}
 
 	err := validator.Validate(rules, messages, r)
 	if err != nil {
-
+		log.Fatal(err)
 	}
+
+	user := &User{}
+
+	decoder := json.NewDecoder(r.Body)
+	decoder.Decode(&user)
+
+
 }
 
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
