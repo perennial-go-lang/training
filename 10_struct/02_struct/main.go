@@ -7,13 +7,13 @@ import (
 type person struct {
 	fName string //fields
 	lName string
-	age int
+	age   int
 }
 
 type student struct {
 	person // promotion of person
 	school string
-	fName string
+	fName  string
 }
 
 func (p person) fullName() string {
@@ -30,7 +30,7 @@ func (p person) introduce() string {
 
 func (s student) introduce() string {
 	//return s.person.introduce() + ". I go to " + s.school
-	return "My name is " + s.fName  + ". I go to " + s.school
+	return "My name is " + s.fName + ". I go to " + s.school
 }
 
 func main() {
