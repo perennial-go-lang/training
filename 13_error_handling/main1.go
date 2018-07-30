@@ -7,24 +7,26 @@ import (
 )
 
 type Exception interface {
-	Action()
+	//Action()
 	GetError() error
 }
 
 type DivisionError struct {
 	Error error
+	Action func()
 }
 
-func (e DivisionError) Action() {
-	fmt.Println("Some action")
-}
+//func (e DivisionError) Action() {
+//	fmt.Println("Some action")
+//}
 
 func (e DivisionError) GetError() error {
 	defer e.Action()
 	return e.Error
 }
 
-var DivideByZero = DivisionError{errors.New("Cannot Divide by Zero") }
+var DivideByZero = DivisionError{errors.New("Cannot Divide by Zero"), func() {
+}}
 
 func main() {
 	var num1, num2, quotient int

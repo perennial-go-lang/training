@@ -9,7 +9,8 @@ const (
 )
 
 const (
-	x = iota
+	_ = iota
+	x
 	y
 	z
 	p
@@ -20,5 +21,5 @@ const (
 
  func main() {
  	fmt.Println(a, b, c)
- 	fmt.Println( y, z, p, q, r, s)
+ 	fmt.Println( x, y, z, p, q, r, s)
  }

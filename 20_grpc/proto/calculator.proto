@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package calculator;
+
+option go_package = "calculatorpb";
+
+message CalculatorRequest {
+    int32 number = 1;
+}
+
+message CalculatorResponse {
+    int32 result = 1;
+}
+
+message CalculatorAverageResponse {
+    float result = 1;
+}
+
+message CalculatorOddEvenResponse {
+    int32 result = 1;
+    string type = 2;
+}
+
+service CalculatorService {
+    // Unary
+    rpc Square (CalculatorRequest) returns (CalculatorResponse) {};
+
+    // Server Streaming
+    rpc PrimeFactors (CalculatorRequest) returns (stream CalculatorResponse) {};
+
+    // Client Streaming
+    rpc Average (stream CalculatorRequest) returns (CalculatorAverageResponse) {};
+
+    // BiDirectional Streaming
+    rpc OddEven (stream CalculatorRequest) returns (stream CalculatorOddEvenResponse) {};
+}

@@ -1,0 +1,15 @@
+syntax="proto3";
+
+message DaysOfWeek {
+    enum Days {
+        UNDEFINED_DAY = 0;
+        MONDAY = 1;
+        TUESDAY = 2;
+        WEDNESDAY = 3;
+        THURSDAY = 4;
+        FRIDAY = 5;
+        SATURDAY = 6;
+        SUNDAY = 7;
+    }
+    Days days_of_week = 1;
+}
