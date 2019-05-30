@@ -23,8 +23,8 @@ func main() {
 	//variable := "ABC"
 	//variable := 123
 	//variable := true
-	variable := 1.23
-	//variable := 'a'
+	//variable := 1.23
+	variable := 'a'
 
 	switchOnType(variable)
 }

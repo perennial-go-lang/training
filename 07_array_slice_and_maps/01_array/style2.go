@@ -10,5 +10,5 @@ func main() {
 	}
 
 	fmt.Println("Array", x)
-	fmt.Println("Value at 30th position", x[31])
+	fmt.Println("Value at 32nd position", x[31])
 }
