@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/anandnkhl/training/09_package/numutil"
-	"github.com/anandnkhl/training/09_package/stringutil"
+	"github.com/perennial-go-training/training/09_package/numutil"
+	"github.com/perennial-go-training/training/09_package/stringutil"
 )
 
 func main() {
