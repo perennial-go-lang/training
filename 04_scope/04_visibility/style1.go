@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/anandnkhl/training/04_scope/04_visibility/mypackage"
+	"github.com/perennial-go-training/training/04_scope/04_visibility/mypackage"
 )
 
 func main() {
