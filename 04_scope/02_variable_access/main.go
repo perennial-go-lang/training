@@ -9,7 +9,7 @@ func main() {
 }
 
 func foo() {
-	// no access to x
+	// no access to x //as x wasn't declared in current scope
 	// this does not compile
 	fmt.Println(x)
 }
